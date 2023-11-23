@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2o8seswv1h2j"]
+
+[ext_resource type="Script" path="res://elements/space_ship/space_ship.gd" id="1_h1au3"]
+[ext_resource type="Texture2D" uid="uid://bammcua7ydlhu" path="res://assets/Main Ship/Main Ship - Bases/PNGs/Main Ship - Base - Full health.png" id="1_yardi"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_foexw"]
+radius = 15.0
+
+[node name="SpaceShip" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_h1au3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2)
+texture = ExtResource("1_yardi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_foexw")

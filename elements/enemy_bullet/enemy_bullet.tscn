@@ -1,0 +1,64 @@
+[gd_scene load_steps=9 format=3 uid="uid://b5mykwco01pk7"]
+
+[ext_resource type="Script" path="res://elements/enemy_bullet/enemy_bullet.gd" id="1_5q7gc"]
+[ext_resource type="Texture2D" uid="uid://c6uadf2ccflyq" path="res://assets/Main ship weapons/PNGs/Main ship weapon - Projectile - Auto cannon bullet.png" id="1_lc1ob"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o7bve"]
+atlas = ExtResource("1_lc1ob")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64vj2"]
+atlas = ExtResource("1_lc1ob")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_at6ly"]
+atlas = ExtResource("1_lc1ob")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5s7ta"]
+atlas = ExtResource("1_lc1ob")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_iwwu1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o7bve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64vj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_at6ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5s7ta")
+}],
+"loop": true,
+"name": &"raketa_bullet",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wc3lq"]
+radius = 5.0
+height = 18.0
+
+[node name="EnemyBullet" type="CharacterBody2D"]
+top_level = true
+collision_layer = 16
+collision_mask = 10
+script = ExtResource("1_5q7gc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+rotation = 3.14025
+sprite_frames = SubResource("SpriteFrames_iwwu1")
+animation = &"raketa_bullet"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_wc3lq")
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -8.9407e-08)
+scale = Vector2(0.5, 0.9)
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
